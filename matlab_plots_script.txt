@@ -1,0 +1,129 @@
+length = 100;
+blue = [0, 0, 1]
+white = [1, 1, 1]
+colors_p = [linspace(white(1),blue(1),length)', linspace(white(2),blue(2),length)', linspace(white(3),blue(3),length)'];
+
+P_C=100
+N_C=100
+[N,P] = meshgrid(1:100);
+tpr = P./100
+fpr = N./100
+prec=P./(P+N)
+acc=(P+(100-N))./(P_C+N_C)
+wra=tpr-fpr
+
+PRECTPR=prec.*tpr
+fb0=PRECTPR./tpr
+fb1=(2*PRECTPR)./(prec+tpr)
+fb2=(4*PRECTPR)./(4*prec+tpr)
+
+gmean=sqrt(tpr.*(1-fpr))
+
+w05=P.^0.5*prec - P_C/(P_C+N_C)
+w1=P.^1*prec - P_C/(P_C+N_C)
+w2=P.^2*prec - P_C/(P_C+N_C)
+w25=P.^25*prec - P_C/(P_C+N_C)
+
+corr_licznik = (P*N_C - P_C*N)
+corr_mian= (sqrt(P_C*N_C.*(P+N).*(P_C-P+N_C-N)))
+corr = corr_licznik./corr_mian
+
+
+figure(1)
+surf(N,P,tpr,'EdgeColor','none')
+colormap(colors_p)
+hold on
+contour3(N,P,tpr,20,'k')
+hold off
+
+figure(2)
+surf(N,P,fpr,'EdgeColor','none')
+colormap(colors_p)
+hold on
+contour3(N,P,fpr,20,'k')
+hold off
+
+
+figure(3)
+precSur=surf(N,P,prec,'EdgeColor','none')
+colormap(colors_p)
+hold on
+contour3(N,P,prec,20,'k')
+hold off
+
+figure(4)
+precSur=surf(N,P,acc,'EdgeColor','none')
+colormap(colors_p)
+hold on
+contour3(N,P,acc,20,'k')
+hold off
+
+figure(5)
+precSur=surf(N,P,wra,'EdgeColor','none')
+colormap(colors_p)
+hold on
+contour3(N,P,wra,20,'k')
+hold off
+
+figure(6)
+precSur=surf(N,P,fb0,'EdgeColor','none')
+colormap(colors_p)
+hold on
+contour3(N,P,fb0,20,'k')
+hold off
+
+figure(7)
+precSur=surf(N,P,fb1,'EdgeColor','none')
+colormap(colors_p)
+hold on
+contour3(N,P,fb1,20,'k')
+hold off
+
+figure(8)
+precSur=surf(N,P,fb2,'EdgeColor','none')
+colormap(colors_p)
+hold on
+contour3(N,P,fb2,20,'k')
+hold off
+
+figure(9)
+precSur=surf(N,P,gmean,'EdgeColor','none')
+colormap(colors_p)
+hold on
+contour3(N,P,gmean,20,'k')
+hold off
+
+figure(10)
+precSur=surf(N,P,w05,'EdgeColor','none')
+colormap(colors_p)
+hold on
+contour3(N,P,w05,20,'k')
+hold off
+
+figure(11)
+precSur=surf(N,P,w1,'EdgeColor','none')
+colormap(colors_p)
+hold on
+contour3(N,P,w1,20,'k')
+hold off
+
+figure(12)
+precSur=surf(N,P,w2,'EdgeColor','none')
+colormap(colors_p)
+hold on
+contour3(N,P,w2,20,'k')
+hold off
+
+figure(13)
+precSur=surf(N,P,w5,'EdgeColor','none')
+colormap(colors_p)
+hold on
+contour3(N,P,w5,20,'k')
+hold off
+
+figure(14)
+precSur=surf(N,P,corr,'EdgeColor','none')
+colormap(colors_p)
+hold on
+contour3(N,P,corr,20,'k')
+hold off
